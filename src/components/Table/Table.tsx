@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Table() {
+function Table(): React.ReactElement {
   return (
-    <h5>I'm a table component</h5>
+    <h5>I&apos;m a table component</h5>
   );
 }
 
