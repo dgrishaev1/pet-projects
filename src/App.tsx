@@ -1,19 +1,14 @@
 import React from 'react';
-import Main from './containers/Main/Main';
 import {Switch, Redirect, Route} from 'react-router-dom';
 
+import Main from './containers/Main/Main';
+
 const App: React.FC = () => {
-  let routes = (
+  return (
     <Switch>
       <Route path="/" exact component={Main}/>
       <Redirect to="/"/>
     </Switch>
-  );
-
-  return (
-    <div>
-      {routes}
-    </div>
   );
 };
 
