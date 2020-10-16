@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 import Table from '../../components/Table/Table';
 
-function Main() {
+function Main(): React.ReactElement {
   return (
     <div>
-      <h2>I'm a main container</h2>
+      <h2>I&apos;m a main container</h2>
       <Table/>
     </div>
   )
 }
 
-export default Main
+export default Main;
