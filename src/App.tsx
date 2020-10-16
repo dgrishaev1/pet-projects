@@ -8,13 +8,13 @@ const App: React.FC = () => {
       <Route path="/" exact component={Main}/>
       <Redirect to="/"/>
     </Switch>
-  )
+  );
 
   return (
     <div>
       {routes}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
