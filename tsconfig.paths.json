@@ -3,6 +3,10 @@
     "baseUrl": ".",
     "paths": {
       "@controller/*": ["src/controller/*"],
+      "@components/*": ["src/components/*"],
+      "@containers/*": ["src/containers/*"],
+      "@actions/*": ["src/store/actions/*"],
+      "@reducers/*": ["src/store/reducers/*"]
     }
   }
 }

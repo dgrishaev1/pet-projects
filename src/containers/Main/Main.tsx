@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Table from '../../components/Table/Table';
+import Table from '@components/Table/Table';
 
 function Main(): React.ReactElement {
   return (
