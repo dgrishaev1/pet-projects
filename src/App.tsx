@@ -1,9 +1,14 @@
 import React from 'react';
 
+import { Test } from '@controller/test';
+
 import logo from './logo.svg';
+
 import './App.css';
 
+
 const App: React.FC = () => {
+  Test();
   return (
     <div className="App">
       <header className="App-header">
