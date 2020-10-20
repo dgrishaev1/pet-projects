@@ -8,8 +8,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import React from 'react';
 
-import DataTable from '@components/Table/DataTable';
-
 const useStyles = makeStyles((theme: Theme) =>
 createStyles({
   root: {
@@ -66,7 +64,7 @@ createStyles({
 }),
 );
 
-function Main(): React.ReactElement {
+function TopBar(): React.ReactElement {
   const classes = useStyles();
 
   return (
@@ -99,10 +97,8 @@ function Main(): React.ReactElement {
           </div>
         </Toolbar>
       </AppBar>
-
-      <DataTable/>
     </div>
   );
 }
 
-export default Main;
+export default TopBar;

@@ -1,9 +1,15 @@
 import React from 'react';
 
-function DataTable(): React.ReactElement {
+import TopBar from '@components/TopBar/TopBar';
+import DataTable from '@components/Table/DataTable';
+
+function Main(): React.ReactElement {
   return(
-    <div>Code</div>
+    <div>
+      <TopBar />
+      <DataTable />
+    </div>
   );
 }
 
-export default DataTable;
+export default Main;
