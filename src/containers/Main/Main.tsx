@@ -1,14 +1,9 @@
 import React from 'react';
 
-import Table from '@components/Table/Table';
-
-function Main(): React.ReactElement {
-  return (
-    <div>
-      <h2>I&apos;m a main container</h2>
-      <Table/>
-    </div>
+function DataTable(): React.ReactElement {
+  return(
+    <div>Code</div>
   );
 }
 
-export default Main;
+export default DataTable;
