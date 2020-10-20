@@ -1,4 +1,3 @@
-import CheckBox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,8 +9,6 @@ import { makeStyles, withStyles, Theme, createStyles } from '@material-ui/core/s
 import React from 'react';
 
 import jsonData from '@components/Table/data.json';
-
-const getStringFromBool = (boolValue: boolean) => boolValue === true? "Да": "Нет";
 
 const useStyles = makeStyles({
   table: {
@@ -46,12 +43,54 @@ const STableCell = withStyles((theme: Theme) =>
 function DataTable(): React.ReactElement {
   const classes = useStyles();
 
+  const convertValue = (value: any) => {
+    switch(typeof(value)) {
+      case 'boolean':
+        if (value === true) {
+          return 'Да'
+        } else {
+          return 'Нет'
+        }
+      case 'object':
+        return '[object]'
+      case 'function':
+        return '[function]'
+      default:
+        return value.toString()
+    }
+  }
+
+  const renderLines = () => {
+    let list:object[] = []
+
+    jsonData.map((rows) => {
+      let info:object[] = []
+
+      Object.values(rows).forEach((value) => info.push(( // @todo проверку пропусков по количеству ячеек
+        <TableCell>
+          {convertValue(value)}
+        </TableCell>
+      )))
+
+      list.push(
+        (
+          <STableRow>
+            {info}
+          </STableRow>
+        )
+      )
+
+      return null
+    })
+
+    return list
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="main table">
         <TableHead>
           <STableRow>
-            <STableCell><CheckBox /></STableCell>
             <STableCell>Номер</STableCell>
             <STableCell>Имя</STableCell>
             <STableCell>Возраст</STableCell>
@@ -66,24 +105,7 @@ function DataTable(): React.ReactElement {
           </STableRow>
         </TableHead>
         <TableBody>
-          {
-            jsonData.map((value, id: number) => (
-              <STableRow key={value.id}>
-                <TableCell><CheckBox /></TableCell>
-                <TableCell>{id}</TableCell>
-                <TableCell>{value.name}</TableCell>
-                <TableCell>{value.age}</TableCell>
-                <TableCell>{value.aScore}</TableCell>
-                <TableCell>{getStringFromBool(value.isVolunter)}</TableCell>
-                <TableCell>{value.strongSubjects}</TableCell>
-                <TableCell>{value.exam}</TableCell>
-                <TableCell>{value.eScore}</TableCell>
-                <TableCell>{value.grants}</TableCell>
-                <TableCell>{value.kurs}</TableCell>
-                <TableCell>{getStringFromBool(value.debts)}</TableCell>
-              </STableRow>
-            ))
-          }
+              {renderLines()}
         </TableBody>
       </Table>
     </TableContainer>

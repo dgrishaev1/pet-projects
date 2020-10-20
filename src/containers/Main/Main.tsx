@@ -4,11 +4,11 @@ import TopBar from '@components/TopBar/TopBar';
 import DataTable from '@components/Table/DataTable';
 
 function Main(): React.ReactElement {
-  return(
-    <div>
+  return (
+    <React.Fragment>
       <TopBar />
       <DataTable />
-    </div>
+    </React.Fragment>
   );
 }
 

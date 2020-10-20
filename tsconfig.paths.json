@@ -2,11 +2,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@controller/*": ["src/controller/*"],
+      "@controllers/*": ["src/controllers/*"],
       "@components/*": ["src/components/*"],
       "@containers/*": ["src/containers/*"],
-      "@actions/*": ["src/store/actions/*"],
-      "@reducers/*": ["src/store/reducers/*"]
+      "@actions/*": ["src/actions/*"],
+      "@reducers/*": ["src/reducers/*"],
+      "@pages/*": ["src/pages/*"],
+      "@store/*": ["src/store/*"]
     }
   }
 }
