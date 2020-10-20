@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 
-import Main from '@containers/Main/Main';
+import Main from '@components/Table/Main';
 
 const App: React.FC = () => {
   return (
