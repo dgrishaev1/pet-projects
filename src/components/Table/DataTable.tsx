@@ -5,7 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { makeStyles, withStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 import jsonData from '@components/Table/data.json';
@@ -46,45 +46,35 @@ function DataTable(): React.ReactElement {
   const convertValue = (value: any) => {
     switch(typeof(value)) {
       case 'boolean':
-        if (value === true) {
-          return 'Да'
-        } else {
-          return 'Нет'
-        }
+        return (value === true) ? 'Да' : 'Нет'
       case 'object':
         return '[object]'
       case 'function':
         return '[function]'
       default:
-        return value.toString()
+        return value
     }
   }
 
-  const renderLines = () => {
-    let list:object[] = []
+  const renderLines = () => (
+    jsonData.map((rows, i) => {
+      let info: object[] = []
 
-    jsonData.map((rows) => {
-      let info:object[] = []
+      Object.values(rows).forEach((value, i) => (
+        info.push(( // @todo проверку пропусков по количеству ячеек
+          <TableCell key={'cell-' + i}>
+            {convertValue(value)}
+          </TableCell>
+        ))
+      ))
 
-      Object.values(rows).forEach((value) => info.push(( // @todo проверку пропусков по количеству ячеек
-        <TableCell>
-          {convertValue(value)}
-        </TableCell>
-      )))
-
-      list.push(
-        (
-          <STableRow>
-            {info}
-          </STableRow>
-        )
+      return (
+        <STableRow key={'row-' + i}>
+          {info}
+        </STableRow>
       )
-
-      return null
     })
-
-    return list
-  }
+  )
 
   return (
     <TableContainer component={Paper}>
