@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TopBar from '@components/TopBar/TopBar';
+import TopBar from '@containers/TopBar/TopBar';
 import DataTable from '@components/Table/DataTable';
 
 function Main(): React.ReactElement {
