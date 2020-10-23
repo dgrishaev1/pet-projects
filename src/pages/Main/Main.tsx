@@ -1,14 +1,14 @@
 import React from 'react';
 
-import TopBar from '@containers/TopBar/TopBar';
-import DataTable from '@components/Table/DataTable';
+import { DataTable } from '@components/Table/DataTable';
+import { TopBar } from '@containers/TopBar/TopBar';
 
 function Main(): React.ReactElement {
   return (
-    <React.Fragment>
+    <>
       <TopBar />
       <DataTable />
-    </React.Fragment>
+    </>
   );
 }
 

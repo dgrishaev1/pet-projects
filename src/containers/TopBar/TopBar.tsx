@@ -64,19 +64,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function TopBar(): React.ReactElement {
+export const TopBar: React.FC = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
@@ -99,6 +94,4 @@ function TopBar(): React.ReactElement {
       </AppBar>
     </div>
   );
-}
-
-export default TopBar;
+};

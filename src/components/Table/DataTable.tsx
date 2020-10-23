@@ -10,6 +10,7 @@ import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/s
 import React from 'react';
 
 import jsonData from '@components/Table/data.json';
+import { JsonDataType } from '@components/Table/utils/types';
 
 const useStyles = makeStyles({
   table: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   },
   container: {
     maxHeight: 700,
-  }
+  },
 });
 
 const STableRow = withStyles((theme: Theme) =>
@@ -33,18 +34,18 @@ const STableRow = withStyles((theme: Theme) =>
 const STableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: "#CBC8D1",
-      color: "#5D5B60",
+      backgroundColor: '#CBC8D1',
+      color: '#5D5B60',
       fontWeight: theme.typography.fontWeightBold,
-      minWidth: 100
+      minWidth: 100,
     },
     body: {
-      fontSize: 14
+      fontSize: 14,
     },
   }),
 )(TableCell);
 
-function DataTable(): React.ReactElement {
+export const DataTable: React.FC = () => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -58,36 +59,31 @@ function DataTable(): React.ReactElement {
     setPage(0);
   };
 
-  const convertValue = (value: any) => {
-    switch(typeof(value)) {
-      case 'object':
-        return '[object]'
-      case 'function':
-        return '[function]'
-      default:
-        return value.toString()
+  const convertValue = (value: JsonDataType) => {
+    if (Array.isArray(value)) {
+      return '[array]';
     }
-  }
 
-  const renderLines = () => (
+    const type = typeof value;
+    if (type === 'object') {
+      return '[object]';
+    }
+    if (type === 'boolean') {
+      return value ? 'Да' : 'Нет';
+    }
+
+    return value;
+  };
+
+  const renderLines = (): Array<JSX.Element> => // @todo проверку пропусков по количеству ячеек
     jsonData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((rows, rowId) => {
-      let info: object[] = []
+      const info = Object.entries(rows).reduce((info2: Array<JSX.Element>, [key, value]) => {
+        info2.push(<TableCell key={`cell-${key}`}>{convertValue(value)}</TableCell>);
+        return info2;
+      }, []);
 
-      Object.values(rows).forEach((value, cellId) => (
-        info.push(( // @todo проверку пропусков по количеству ячеек
-          <TableCell key={'cell-' + cellId}>
-            {convertValue(value)}
-          </TableCell>
-        ))
-      ))
-
-      return (
-        <STableRow key={'row-' + rowId}>
-          {info}
-        </STableRow>
-      )
-    })
-  )
+      return <STableRow key={`row-${rowId}`}>{info}</STableRow>;
+    });
 
   return (
     <Paper>
@@ -108,9 +104,7 @@ function DataTable(): React.ReactElement {
               <STableCell>Имеет ли долги</STableCell>
             </STableRow>
           </TableHead>
-          <TableBody>
-                {renderLines()}
-          </TableBody>
+          <TableBody>{renderLines()}</TableBody>
         </Table>
       </TableContainer>
       <TablePagination
@@ -124,6 +118,4 @@ function DataTable(): React.ReactElement {
       />
     </Paper>
   );
-}
-
-export default DataTable;
+};
