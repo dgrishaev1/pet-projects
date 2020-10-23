@@ -3,6 +3,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
@@ -14,6 +15,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 800,
   },
+  container: {
+    maxHeight: 700,
+  }
 });
 
 const STableRow = withStyles((theme: Theme) =>
@@ -42,34 +46,43 @@ const STableCell = withStyles((theme: Theme) =>
 
 function DataTable(): React.ReactElement {
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const convertValue = (value: any) => {
     switch(typeof(value)) {
-      case 'boolean':
-        return (value === true) ? 'Да' : 'Нет'
       case 'object':
         return '[object]'
       case 'function':
         return '[function]'
       default:
-        return value
+        return value.toString()
     }
   }
 
   const renderLines = () => (
-    jsonData.map((rows, i) => {
+    jsonData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((rows, rowId) => {
       let info: object[] = []
 
-      Object.values(rows).forEach((value, i) => (
+      Object.values(rows).forEach((value, cellId) => (
         info.push(( // @todo проверку пропусков по количеству ячеек
-          <TableCell key={'cell-' + i}>
+          <TableCell key={'cell-' + cellId}>
             {convertValue(value)}
           </TableCell>
         ))
       ))
 
       return (
-        <STableRow key={'row-' + i}>
+        <STableRow key={'row-' + rowId}>
           {info}
         </STableRow>
       )
@@ -77,28 +90,39 @@ function DataTable(): React.ReactElement {
   )
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} size="small" aria-label="main table">
-        <TableHead>
-          <STableRow>
-            <STableCell>Номер</STableCell>
-            <STableCell>Имя</STableCell>
-            <STableCell>Возраст</STableCell>
-            <STableCell>Средний балл</STableCell>
-            <STableCell>Является ли волонтёром</STableCell>
-            <STableCell>Любимые дисциплины</STableCell>
-            <STableCell>Экзамен</STableCell>
-            <STableCell>Оценка по экзамену</STableCell>
-            <STableCell>Стипендия</STableCell>
-            <STableCell>Курс</STableCell>
-            <STableCell>Имеет ли долги</STableCell>
-          </STableRow>
-        </TableHead>
-        <TableBody>
-              {renderLines()}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Paper>
+      <TableContainer className={classes.container}>
+        <Table className={classes.table} size="small" aria-label="sticky table" stickyHeader>
+          <TableHead>
+            <STableRow>
+              <STableCell>Номер</STableCell>
+              <STableCell>Имя</STableCell>
+              <STableCell>Возраст</STableCell>
+              <STableCell>Средний балл</STableCell>
+              <STableCell>Является ли волонтёром</STableCell>
+              <STableCell>Любимые дисциплины</STableCell>
+              <STableCell>Экзамен</STableCell>
+              <STableCell>Оценка по экзамену</STableCell>
+              <STableCell>Стипендия</STableCell>
+              <STableCell>Курс</STableCell>
+              <STableCell>Имеет ли долги</STableCell>
+            </STableRow>
+          </TableHead>
+          <TableBody>
+                {renderLines()}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={jsonData.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 }
 
