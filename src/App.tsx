@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 
-import Main from '@components/TopBar/TopBar';
+import Main from '@pages/Main/Main';
 
 const App: React.FC = () => {
   return (
