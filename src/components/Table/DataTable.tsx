@@ -3,8 +3,8 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import React from 'react';
@@ -49,6 +49,21 @@ export const DataTable: React.FC = () => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [isEditable, setEditCell] = React.useState(false);
+  const [coords, setCoords] = React.useState<[number, string | number | boolean]>([0, ""]);
+
+  const handleDoubleClick = (rowID: number, title: string | number | boolean) => { // При двойном клике по ячейке
+    setCoords([rowID, title]);  // Получение номера её строки и названия поля в json
+    setEditCell(!isEditable);   // Сделать ячейку изменяемой (пока открываются все ячейки)
+    console.log([rowID, title]);  //
+  };
+
+  const handleChangeInput = (e: any) => { // При изменении текста ячейки
+    const val = e.target.value; // Получить сам текст
+    const row: number = coords[0];  // Номер строки
+    const title: string | number | boolean = coords[1]; // Имя поля в json
+    //jsonData[row].title = val;  // Запись в json по имени поля и номеру записи (строки)
+  };
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -76,13 +91,13 @@ export const DataTable: React.FC = () => {
   };
 
   const renderLines = (): Array<JSX.Element> => // @todo проверку пропусков по количеству ячеек
-    jsonData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((rows, rowId) => {
-      const info = Object.entries(rows).reduce((info2: Array<JSX.Element>, [key, value]) => {
-        info2.push(<TableCell key={`cell-${key}`}>{convertValue(value)}</TableCell>);
+    jsonData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowID) => {
+      const info = Object.entries(row).reduce((info2: Array<JSX.Element>, [title, value]) => {
+        info2.push(<TableCell key={`cell-${title}`} onDoubleClick={() => handleDoubleClick(rowID, title)} onChange={(e) => handleChangeInput(e)} contentEditable={isEditable} >{convertValue(value)}</TableCell>);
         return info2;
       }, []);
 
-      return <STableRow key={`row-${rowId}`}>{info}</STableRow>;
+      return <STableRow key={`row-${rowID}`} >{info}</STableRow>;
     });
 
   return (
