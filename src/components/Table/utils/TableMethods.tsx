@@ -1,51 +1,37 @@
 import React from 'react';
 
 import jsonDocument from '@components/Table/data.json';
-import { STableRow, STableCell } from '@components/Table/utils/styles';
+import { STableRow } from '@components/Table/utils/styles';
 import { JsonObjectType } from '@components/Table/utils/types';
+import { TableCellEditable } from '@components/TableCellEditable/TableCellEditable';
 
 export const jsonData: Array<JsonObjectType> = jsonDocument;
 
-const [isEditable, setEditCell] = React.useState(false);
-const [coords, setCoords] = React.useState<[number, string]>([0, ""]);
-
-const handleDoubleClick = (rowID: number, title: string) => { // При двойном клике по ячейке
-    setCoords([rowID, title]);  // Получение номера её строки и названия поля в json
-    setEditCell(!isEditable);   // Сделать ячейку изменяемой (пока открываются все ячейки)
-    console.log([rowID, title]);  //
-};
-
-const handleChangeInput = (event: any) => { // При изменении текста ячейки
-    const val = event.target.value; // Получить сам текст
-    const row: number = coords[0];  // Номер строки
-    const title: string = coords[1]; // Имя поля в json
-    jsonData[row][title] = val;
-    console.log(jsonData);  // Запись в json по имени поля и номеру записи (строки)
-};
-
 const convertValue = (value: JsonObjectType) => {
-    if (Array.isArray(value)) {
-      return '[array]';
-    }
+  if (Array.isArray(value)) {
+    return '[array]';
+  }
 
-    const type = typeof value;
-    if (type === 'object') {
-      return '[object]';
-    }
-    if (type === 'boolean') {
-      return value ? 'Да' : 'Нет';
-    }
+  const type = typeof value;
+  if (type === 'object') {
+    return '[object]';
+  }
+  if (type === 'boolean') {
+    return value ? 'Да' : 'Нет';
+  }
 
-    return value;
+  return value;
 };
 
-export const renderLines = (page: number, rowsPerPage: number): Array<JSX.Element> => ( // @todo проверку пропусков по количеству ячеек
-    jsonData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowID) => {
-      const info = Object.entries(row).reduce((info2: Array<JSX.Element>, [title, value]) => {
-        info2.push(<STableCell key={`cell-${title}`} onDoubleClick={() => handleDoubleClick(rowID, title)} onChange={(event) => handleChangeInput(event)} contentEditable={isEditable} >{convertValue(value)}</STableCell>);
-        return info2;
-      }, []);
+// TODO Даниил: проверку пропусков по количеству ячеек
+export const renderLines = (page: number, rowsPerPage: number): Array<JSX.Element> =>
+  jsonData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowID) => {
+    const info = Object.entries(row).reduce((cells: Array<JSX.Element>, [title, value]) => {
+      return [
+        ...cells,
+        <TableCellEditable key={`cell-${title}`} rowID={rowID} title={title} label={convertValue(value)} />,
+      ];
+    }, []);
 
-      return <STableRow key={`row-${rowID}`} >{info}</STableRow>;
-    })
-);
+    return <STableRow key={`row-${rowID}`}>{info}</STableRow>;
+  });

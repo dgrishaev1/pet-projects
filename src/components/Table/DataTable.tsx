@@ -7,22 +7,22 @@ import TablePagination from '@material-ui/core/TablePagination';
 import React from 'react';
 
 import { jsonData, renderLines } from '@components/Table/utils/TableMethods';
-import { useStyles, STableRow, STableCell } from '@components/Table/utils/styles'; 
-
-const [page, setPage] = React.useState(0);
-const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-const handleChangePage = (event: unknown, newPage: number) => {
-  setPage(newPage);
-};
-
-const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-  setRowsPerPage(+event.target.value);
-  setPage(0);
-};
+import { useStyles, STableRow, STableCell } from '@components/Table/utils/styles';
 
 export const DataTable: React.FC = () => {
   const classes = useStyles();
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <Paper>
