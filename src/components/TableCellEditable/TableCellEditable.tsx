@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { jsonData } from '@components/Table/utils/TableMethods';
 import { STableCell } from '@components/Table/utils/styles';
 import { JsonObjectType } from '@components/Table/utils/types';
