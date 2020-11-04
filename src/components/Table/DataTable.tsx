@@ -6,9 +6,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import React from 'react';
 
-import { jsonData, renderLines} from '@components/Table/utils/TableMethods';
+import { jsonData, renderHeadLines, renderBodyLines} from '@components/Table/utils/TableMethods';
 import { useStyles } from '@components/Table/utils/styles';
-import { renderHead } from './utils/TableMethods';
 
 export const DataTable: React.FC = () => {
   const classes = useStyles();
@@ -29,8 +28,8 @@ export const DataTable: React.FC = () => {
     <Paper>
       <TableContainer className={classes.container}>
         <Table className={classes.table} size="small" aria-label="sticky table" stickyHeader>
-          <TableHead>{renderHead()}</TableHead>
-          <TableBody>{renderLines(page, rowsPerPage)}</TableBody>
+          <TableHead>{renderHeadLines()}</TableHead>
+          <TableBody>{renderBodyLines(page, rowsPerPage)}</TableBody>
         </Table>
       </TableContainer>
       <TablePagination
