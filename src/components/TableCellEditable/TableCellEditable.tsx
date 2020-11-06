@@ -3,15 +3,17 @@ import React, { useEffect } from 'react';
 
 import { jsonData } from '@components/Table/utils/TableMethods';
 import { STableCell } from '@components/Table/utils/styles';
-import { Input } from '@material-ui/core';
 
 export const TableCellEditable: React.FC<{ label: string; rowID: number; title: string }> = ({
   label,
   rowID,
   title,
 }) => {
+
   const [isEditable, setEditCell] = React.useState(false);
   const [newInputValue, setNewInputValue] = React.useState();
+
+  const toggleCellInput = () => isEditable ? <Input onChange={(e: any) => setNewInputValue(e.target.value)} value={label} /> : label;
 
   useEffect(() => {
     console.log(newInputValue);
@@ -20,19 +22,7 @@ export const TableCellEditable: React.FC<{ label: string; rowID: number; title: 
 
   const handleDoubleClick = () => {
     setEditCell(!isEditable);
-    //console.log([rowID, title]);
   };
-
-  /*const handleChangeInput = (event: any) => { // React.FormEvent<HTMLTableDataCellElement>
-    // console.log(event);
-    // console.log(jsonData);
-    const val = event.target.value;
-    jsonData[rowID][title] = val;
-    console.log(jsonData);
-  };*/
-
-
-  const toggleCellInput = () => isEditable ? <Input onChange={(e: any) => setNewInputValue(e.target.value)} value={label} /> : label;
 
   return (
     <STableCell onDoubleClick={handleDoubleClick} >
