@@ -1,4 +1,5 @@
-import React from 'react';
+import Input from '@material-ui/core/Input';
+import React, { useEffect } from 'react';
 
 import { jsonData } from '@components/Table/utils/TableMethods';
 import { STableCell } from '@components/Table/utils/styles';
@@ -10,22 +11,32 @@ export const TableCellEditable: React.FC<{ label: string | JsonObjectType; rowID
   title,
 }) => {
   const [isEditable, setEditCell] = React.useState(false);
+  const [newInputValue, setNewInputValue] = React.useState();
 
-  const handleDoubleClick = (event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>) => {
+  useEffect(() => {
+    console.log(newInputValue);
+  }, [newInputValue]);
+
+
+  const handleDoubleClick = () => {
     setEditCell(!isEditable);
-    console.log([rowID, title]);
+    //console.log([rowID, title]);
   };
 
-  const handleChangeInput = (event: React.FormEvent<HTMLTableDataCellElement>) => {
+  /*const handleChangeInput = (event: any) => { // React.FormEvent<HTMLTableDataCellElement>
     // console.log(event);
     // console.log(jsonData);
-    // const val = event.target.value;
-    jsonData[rowID][title] = 'val';
-  };
+    const val = event.target.value;
+    jsonData[rowID][title] = val;
+    console.log(jsonData);
+  };*/
+
+
+  const toggleCellInput = () => isEditable ? <Input onChange={(e: any) => setNewInputValue(e.target.value)} value={label} /> : label;
 
   return (
-    <STableCell onDoubleClick={handleDoubleClick} onChange={(e) => handleChangeInput(e)} contentEditable={isEditable}>
-      {label}
+    <STableCell onDoubleClick={handleDoubleClick} >
+      {toggleCellInput()}
     </STableCell>
   );
 };
