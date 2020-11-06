@@ -1,31 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { jsonData } from '@components/Table/utils/TableMethods';
 import { STableCell } from '@components/Table/utils/styles';
-import { JsonObjectType } from '@components/Table/utils/types';
+import { Input } from '@material-ui/core';
 
-export const TableCellEditable: React.FC<{ label: string | JsonObjectType; rowID: number; title: string }> = ({
+export const TableCellEditable: React.FC<{ label: string; rowID: number; title: string }> = ({
   label,
   rowID,
   title,
 }) => {
   const [isEditable, setEditCell] = React.useState(false);
+  const [testValue, setTestValue] = React.useState('');
+
+  useEffect(() => {
+    setTestValue(label);
+  }, [label]);
 
   const handleDoubleClick = (event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>) => {
     setEditCell(!isEditable);
-    console.log([rowID, title]);
   };
 
-  const handleChangeInput = (event: React.FormEvent<HTMLTableDataCellElement>) => {
-    // console.log(event);
-    // console.log(jsonData);
-    // const val = event.target.value;
-    jsonData[rowID][title] = 'val';
+  const handleChangeInput = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    jsonData[rowID][title] = event.target.value;
+    setTestValue(event.target.value);
   };
 
   return (
-    <STableCell onDoubleClick={handleDoubleClick} onChange={(e) => handleChangeInput(e)} contentEditable={isEditable}>
-      {label}
+    <STableCell onDoubleClick={handleDoubleClick}>
+      <Input value={testValue} onChange={(e) => handleChangeInput(e)} />
     </STableCell>
   );
 };
