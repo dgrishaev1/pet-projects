@@ -7,7 +7,7 @@ import { TableCellEditable } from '@components/TableCellEditable/TableCellEditab
 
 export const jsonData: Array<JsonObjectType> = jsonDocument;
 
-const convertValue = (value: JsonObjectType) => {
+const convertValue = (value: JsonObjectType): string => {
   if (Array.isArray(value)) {
     return '[array]';
   }
@@ -20,7 +20,7 @@ const convertValue = (value: JsonObjectType) => {
     return value ? 'Да' : 'Нет';
   }
 
-  return value;
+  return value.toString();
 };
 
 // TODO Даниил: проверку пропусков по количеству ячеек
