@@ -1,33 +1,31 @@
-import React, { useEffect } from 'react';
-
-import { jsonData } from '@components/Table/utils/TableMethods';
-import { STableCell } from '@components/Table/utils/styles';
 import { Input } from '@material-ui/core';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { STableCell } from '@components/Table/utils/styles';
+import { setJson } from '@controllers/dataTable/actions';
 
 export const TableCellEditable: React.FC<{ label: string; rowID: number; title: string }> = ({
   label,
   rowID,
   title,
 }) => {
+  const dispatch = useDispatch();
   const [isEditable, setEditCell] = React.useState(false);
-  const [testValue, setTestValue] = React.useState('');
+  let newValue = label;
 
-  useEffect(() => {
-    setTestValue(label);
-  }, [label]);
-
-  const handleDoubleClick = (event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>) => {
+  const handleDoubleClick = () => {
     setEditCell(!isEditable);
   };
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    jsonData[rowID][title] = event.target.value;
-    setTestValue(event.target.value);
+    newValue = event.target.value;
+    dispatch(setJson({ rowID, title, newValue }));
   };
 
   return (
     <STableCell onDoubleClick={handleDoubleClick}>
-      <Input value={testValue} onChange={(e) => handleChangeInput(e)} />
+      <Input value={newValue} onChange={(e) => handleChangeInput(e)} />
     </STableCell>
   );
 };

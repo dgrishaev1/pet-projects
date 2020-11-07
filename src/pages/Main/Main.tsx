@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { DataTable } from '@components/Table/DataTable';
 import { TopBar } from '@containers/TopBar/TopBar';
+import DataTable from '@components/Table/DataTable';
 
 function Main(): React.ReactElement {
   return (

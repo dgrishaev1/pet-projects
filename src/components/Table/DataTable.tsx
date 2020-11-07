@@ -5,11 +5,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { jsonData, renderHeadLines, renderBodyLines} from '@components/Table/utils/TableMethods';
+import { renderHeadLines, renderBodyLines } from '@components/Table/utils/TableMethods';
 import { useStyles } from '@components/Table/utils/styles';
+import { getJson } from '@controllers/dataTable/selectors';
 
-export const DataTable: React.FC = () => {
+const DataTable: React.FC = () => {
+  const json = useSelector(getJson);
+
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -28,14 +32,14 @@ export const DataTable: React.FC = () => {
     <Paper>
       <TableContainer className={classes.container}>
         <Table className={classes.table} size="small" aria-label="sticky table" stickyHeader>
-          <TableHead>{renderHeadLines()}</TableHead>
-          <TableBody>{renderBodyLines(page, rowsPerPage)}</TableBody>
+          <TableHead>{renderHeadLines(json)}</TableHead>
+          <TableBody>{renderBodyLines(json, page, rowsPerPage)}</TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={jsonData.length}
+        count={json.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
@@ -44,3 +48,5 @@ export const DataTable: React.FC = () => {
     </Paper>
   );
 };
+
+export default DataTable;

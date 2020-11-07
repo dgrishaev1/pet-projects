@@ -1,13 +1,10 @@
 import React from 'react';
 
-import jsonDocument from '@components/Table/data.json';
 import { STableRow, STableCell } from '@components/Table/utils/styles';
-import { JsonObjectType } from '@components/Table/utils/types';
+import { JsonDataType, JsonObjectType } from '@components/Table/utils/types';
 import { TableCellEditable } from '@components/TableCellEditable/TableCellEditable';
 
-export const jsonData: Array<JsonObjectType> = jsonDocument;
-
-const convertValue = (value: JsonObjectType): string => {
+const convertValue = (value: JsonDataType): string => {
   if (Array.isArray(value)) {
     return '[array]';
   }
@@ -23,9 +20,8 @@ const convertValue = (value: JsonObjectType): string => {
   return value.toString();
 };
 
-// TODO Даниил: проверку пропусков по количеству ячеек
-export const renderBodyLines = (page: number, rowsPerPage: number): Array<JSX.Element> => (
-  jsonData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowID) => {
+export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage: number): Array<JSX.Element> => (
+  data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: string, rowID: number) => {
     const cellsArray = Object.entries(row).reduce((cells: Array<JSX.Element>, [title, value]) => {
       return [
         ...cells,
@@ -37,11 +33,11 @@ export const renderBodyLines = (page: number, rowsPerPage: number): Array<JSX.El
   })
 );
 
-export const renderHeadLines = (): React.ReactElement => {
+export const renderHeadLines = (data: JsonDataType): React.ReactElement => {
   return (
     <STableRow>
       {
-        Object.entries(jsonData[0]).map(([jsonObjectKey], index) => <STableCell key={`cell-${index}`}>{jsonObjectKey}</STableCell>)
+        Object.entries(data).map(([jsonObjectKey], index) => <STableCell key={`cell-${index}`}>{jsonObjectKey}</STableCell>)
       }
     </STableRow>
   );
