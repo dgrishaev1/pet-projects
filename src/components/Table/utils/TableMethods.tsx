@@ -21,6 +21,8 @@ const convertValue = (value: JsonDataType): string => {
 };
 
 export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage: number): Array<JSX.Element> =>
+
+  // TODO: Строить ячейки как заголовки
   data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: string, rowID: number) => {
     const cellsArray = Object.entries(row).reduce((cells: Array<JSX.Element>, [title, value]) => {
       return [
@@ -35,6 +37,7 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
 export const renderHeadLines = (data: JsonObjectType): JSX.Element => {
   const titlesArray: Array<string> = [];
 
+  // TODO: Упростить
   data.map((row: string) =>
     Object.entries(row).forEach(([title]) => (titlesArray.indexOf(title) === -1 ? titlesArray.push(title) : null)),
   );
