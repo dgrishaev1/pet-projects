@@ -20,7 +20,7 @@ const convertValue = (value: JsonDataType): string => {
   return value.toString();
 };
 
-export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage: number): Array<JSX.Element> => (
+export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage: number): Array<JSX.Element> =>
   data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: string, rowID: number) => {
     const cellsArray = Object.entries(row).reduce((cells: Array<JSX.Element>, [title, value]) => {
       return [
@@ -30,17 +30,20 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
     }, []);
 
     return <STableRow key={`row-${rowID}`}>{cellsArray}</STableRow>;
-  })
-);
+  });
 
-export const renderHeadLines = (data: JsonDataType): React.ReactElement => {
+export const renderHeadLines = (data: JsonObjectType): JSX.Element => {
+  const titlesArray: Array<string> = [];
+
+  data.map((row: string) =>
+    Object.entries(row).forEach(([title]) => (titlesArray.indexOf(title) === -1 ? titlesArray.push(title) : null)),
+  );
+
   return (
     <STableRow>
-      {
-        Object.entries(data).map(([jsonObjectKey], index) => <STableCell key={`cell-${index}`}>{jsonObjectKey}</STableCell>)
-      }
+      {titlesArray.map((title) => (
+        <STableCell key={`cell-${title}`}>{title}</STableCell>
+      ))}
     </STableRow>
   );
 };
-
-

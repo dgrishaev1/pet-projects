@@ -12,6 +12,7 @@ export const TableCellEditable: React.FC<{ label: string; rowID: number; title: 
 }) => {
   const dispatch = useDispatch();
   const [isEditable, setEditCell] = React.useState(false);
+
   let newValue = label;
 
   const handleDoubleClick = () => {
@@ -25,7 +26,7 @@ export const TableCellEditable: React.FC<{ label: string; rowID: number; title: 
 
   return (
     <STableCell onDoubleClick={handleDoubleClick}>
-      <Input value={newValue} onChange={(e) => handleChangeInput(e)} />
+      <Input defaultValue={newValue} readOnly={!isEditable} onChange={(e) => handleChangeInput(e)} disableUnderline />
     </STableCell>
   );
 };
