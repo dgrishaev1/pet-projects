@@ -19,8 +19,8 @@ export const TableCellEditable: React.FC<{ label: string; rowID: number; title: 
     setEditCell(!isEditable);
   };
 
-  const handleChangeInput  = debounce((selectInputValue) => { 
-      newChangedInputValue = selectInputValue;
+  const handleChangeInput  = debounce((selectedInputValue) => { 
+      newChangedInputValue = selectedInputValue;
       setTimeout(() => dispatch(setJson({ rowID, title, newChangedInputValue })));
   }, 1000);
 
