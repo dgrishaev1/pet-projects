@@ -9,10 +9,10 @@ const initialState: DataTableState = {
 
 export const dataTable = handleActions(
   {
-    [ActionType.EDIT_CELL]: (state: DataTableState, { payload: { rowID, title, newValue } }: EditCellPayloadType) => {
+    [ActionType.EDIT_CELL]: (state: DataTableState, { payload: { rowID, title, newChangedInputValue } }: EditCellPayloadType) => {
       const ret = {...state};
       console.log('Old:',ret.json[rowID]);
-      ret.json[rowID][title] = newValue;
+      ret.json[rowID][title] = newChangedInputValue;
       console.log('New:',ret.json[rowID]);
       return ret;
     },
