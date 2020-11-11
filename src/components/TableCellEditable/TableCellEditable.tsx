@@ -1,4 +1,5 @@
 import { Input } from '@material-ui/core';
+import debounce from 'lodash/debounce';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -12,20 +13,23 @@ export const TableCellEditable: React.FC<{ label: string; rowID: number; title: 
 }) => {
   const dispatch = useDispatch();
   const [isEditable, setEditCell] = React.useState(false);
-  let newValue = label;
+  let newChangedInputValue = label;
 
   const handleDoubleClick = () => {
     setEditCell(!isEditable);
   };
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    newValue = event.target.value;
-    dispatch(setJson({ rowID, title, newValue }));
-  };
+  const handleChangeInput  = debounce((selectInputValue) => { 
+      newChangedInputValue = selectInputValue;
+      setTimeout(() => dispatch(setJson({ rowID, title, newChangedInputValue })));
+  }, 1000);
+
+  const toggleInput = () => 
+    isEditable ? <Input onChange={(e) => handleChangeInput(e.target.value)} /> : newChangedInputValue;
 
   return (
     <STableCell onDoubleClick={handleDoubleClick}>
-      <Input value={newValue} onChange={(e) => handleChangeInput(e)} />
+      {toggleInput()}
     </STableCell>
   );
 };
