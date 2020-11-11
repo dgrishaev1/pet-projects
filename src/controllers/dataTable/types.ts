@@ -8,7 +8,7 @@ export type EditCellPayloadType = {
   payload: {
     rowID: number,
     title: string,
-    newValue: string
+    newChangedInputValue: string
   },
 }
 
