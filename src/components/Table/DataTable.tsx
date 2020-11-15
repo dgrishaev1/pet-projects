@@ -9,11 +9,11 @@ import { useSelector } from 'react-redux';
 
 import { renderHeadLines, renderBodyLines } from '@components/Table/utils/TableMethods';
 import { useStyles } from '@components/Table/utils/styles';
-import { getJson } from '@controllers/dataTable/selectors';
+import { getData } from '@controllers/dataTable/selectors';
 import { JsonObjectType } from './utils/types';
 
 const DataTable: React.FC = () => {
-  const json: JsonObjectType = useSelector(getJson);
+  const json: JsonObjectType = useSelector(getData);
 
   const classes = useStyles();
 

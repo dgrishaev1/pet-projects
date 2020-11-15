@@ -1,7 +1,7 @@
 import { ActionType } from '@controllers/dataTable/types';
+import { InputType } from '@components/Table/utils/types';
 
-// TODO: Переименовать функцию (modifyData)
-export const setJson = (payload: any) => ({
+export const modifyData = (payload: {rowID: number, rowKey: string, newValue: InputType}) => ({
   type: ActionType.EDIT_CELL,
   payload
 });

@@ -25,10 +25,10 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
 
   // TODO: Строить ячейки как заголовки
   data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: string, rowID: number) => {
-    const cellsArray = Object.entries(row).reduce((cells: Array<JSX.Element>, [title, value]) => {
+    const cellsArray = Object.entries(row).reduce((cells: Array<JSX.Element>, [rowKey, value]) => {
       return [
         ...cells,
-        <TableCellEditable key={`cell-${title}`} rowID={rowID} title={title} label={convertValue(value)} />,
+        <TableCellEditable key={`cell-${rowKey}`} rowID={rowID} rowKey={rowKey} label={convertValue(value)} />,
       ];
     }, []);
 

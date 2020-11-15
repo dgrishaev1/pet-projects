@@ -7,8 +7,8 @@ export enum ActionType {
 export type EditCellPayloadType = {
   payload: {
     rowID: number,
-    title: string,
-    newChangedInputValue: InputType,
+    rowKey: string,
+    newValue: InputType,
   },
 }
 
