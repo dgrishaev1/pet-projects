@@ -29,6 +29,7 @@ const DataTable: React.FC = () => {
     setPage(0);
   };
 
+  // TODO: Не работает перелистывание страниц
   return (
     <Paper>
       <TableContainer className={classes.container}>
