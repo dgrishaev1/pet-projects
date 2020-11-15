@@ -1,20 +1,21 @@
 import React from 'react';
 
 import { STableRow, STableCell } from '@components/Table/utils/styles';
-import { JsonDataType, JsonObjectType } from '@components/Table/utils/types';
+import { JsonDataType, JsonObjectType, InputType } from '@components/Table/utils/types';
 import { TableCellEditable } from '@components/TableCellEditable/TableCellEditable';
 
 const convertValue = (value: JsonDataType): string => {
-  if (Array.isArray(value)) {
-    return '[array]';
-  }
-
   const type = typeof value;
+  
   if (type === 'object') {
     return '[object]';
   }
   if (type === 'boolean') {
     return value ? 'Да' : 'Нет';
+  }
+
+  if (Array.isArray(value)) {
+    return '[array]';
   }
 
   return value.toString();
@@ -49,4 +50,10 @@ export const renderHeadLines = (data: JsonObjectType): JSX.Element => {
       ))}
     </STableRow>
   );
+};
+
+export const getValue = (e: React.SyntheticEvent): InputType => {
+  const target = e.target as HTMLInputElement;
+   
+  return +target.value || target.value;
 };
