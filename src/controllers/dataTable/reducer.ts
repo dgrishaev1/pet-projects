@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 
 import jsonDocument from '@components/Table/data.json';
 import { ActionType, DataTableState, EditCellPayloadType } from '@controllers/dataTable/types';
+import { JsonObjectType } from '@components/Table/utils/types';
 
 const initialState: DataTableState = {
   json: jsonDocument,
@@ -10,12 +11,15 @@ const initialState: DataTableState = {
 export const dataTable = handleActions(
   {
     [ActionType.EDIT_CELL]: (state: DataTableState, { payload: { rowID, rowKey, newValue } }: EditCellPayloadType) => {
-      const ret = {...state};
-      console.log('Old:',ret.json[rowID]);
+      // TODO: пофиксить, вынести из reducer'а
+      const ret = { ...state };
       ret.json[rowID][rowKey] = newValue;
-      console.log('New:',ret.json[rowID]);
       return ret;
     },
+    [ActionType.SET_JSON_TABLE_DATA]: (state: DataTableState, { payload }: any) => ({
+      ...state,
+      json: payload,
+    }),
   },
   initialState,
 );
