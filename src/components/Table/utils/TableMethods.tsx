@@ -1,6 +1,7 @@
 import { union } from 'lodash';
 import React from 'react';
 
+import Checkbox from '@material-ui/core/Checkbox';
 import { STableRow, STableCell } from '@components/Table/utils/styles';
 import { JsonDataType, JsonObjectType, InputType } from '@components/Table/utils/types';
 import { TableCellEditable } from '@components/TableCellEditable/TableCellEditable';
@@ -32,7 +33,15 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
       ];
     }, []);
 
-    return <STableRow key={`row-${rowID}`}>{cellsArray}</STableRow>;
+    return (
+      <STableRow key={`row-${rowID}`}>
+        <STableCell padding="checkbox">
+          <Checkbox />
+        </STableCell>
+
+        {cellsArray}
+      </STableRow>
+    );
   });
 
 export const renderHeadLines = (data: JsonObjectType): JSX.Element => {
@@ -42,6 +51,10 @@ export const renderHeadLines = (data: JsonObjectType): JSX.Element => {
 
   return (
     <STableRow>
+      <STableCell padding="checkbox">
+        <Checkbox />
+      </STableCell>
+      
       {titlesArray.map((title) => (
         <STableCell key={`cell-${title}`}>{title}</STableCell>
       ))}
