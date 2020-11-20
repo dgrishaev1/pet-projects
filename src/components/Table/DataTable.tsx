@@ -16,6 +16,7 @@ const DataTable: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [tableData, setTableData] = React.useState<Array<JsonObjectType>>([]);
+
   const dispatch = useDispatch();
   const json = useSelector(getData);
   const vector = useSelector(getVector);
@@ -35,7 +36,6 @@ const DataTable: React.FC = () => {
     setPage(0);
   };
 
-  // TODO: Не работает перелистывание страниц
   return (
     <Paper>
       <TableContainer className={classes.container}>

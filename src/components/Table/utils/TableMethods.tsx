@@ -31,7 +31,7 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
       return [
         ...cells,
         <TableCellEditable
-          key={`cell-${rowKey}`}
+          key={`cell-${page}-${rowKey}`}
           data={data}
           rowID={rowID}
           rowKey={rowKey}
