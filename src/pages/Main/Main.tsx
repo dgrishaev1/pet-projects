@@ -1,23 +1,24 @@
+import { keys } from 'lodash';
 import React, { useEffect } from 'react';
-
-import { TopBar } from '@containers/TopBar/TopBar';
-import DataTable from '@components/Table/DataTable';
-import { JsonObjectType } from '@components/Table/utils/types';
 import { useDispatch, useSelector } from 'react-redux';
+
+import DataTable from '@components/Table/DataTable';
+import { TopBar } from '@containers/TopBar/TopBar';
+import { setJsonTableVector, setJsonTableData } from '@controllers/dataTable/actions';
 import { getData } from '@controllers/dataTable/selectors';
-import { normalizeJsonData } from '@pages/Main/utils';
-import { setJsonTableData } from '@controllers/dataTable/actions';
+import { normalizeJsonData, normalizeVector } from '@pages/Main/utils';
 
 function Main(): React.ReactElement {
-  // setJsonTableData
   const dispatch = useDispatch();
   const json = useSelector(getData);
+
   const [isNormalized, setNormalized] = React.useState(false);
 
   useEffect(() => {
-    const normalizeData = normalizeJsonData(json);
+    const dataVector = normalizeVector(json);
+    dispatch(setJsonTableVector(keys(dataVector)));
+    const normalizeData = normalizeJsonData(json, dataVector);
     dispatch(setJsonTableData(normalizeData));
-    // TODO: написать редьюсер который хранит хедеры
     setNormalized(true);
   }, []);
 

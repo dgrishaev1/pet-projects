@@ -1,24 +1,28 @@
+import { cloneDeep } from 'lodash';
 import { handleActions } from 'redux-actions';
 
 import jsonDocument from '@components/Table/data.json';
-import { ActionType, DataTableState, EditCellPayloadType } from '@controllers/dataTable/types';
 import { JsonObjectType } from '@components/Table/utils/types';
+import { ActionType, DataTableState } from '@controllers/dataTable/types';
 
 const initialState: DataTableState = {
   json: jsonDocument,
+  vector: [],
 };
 
 export const dataTable = handleActions(
   {
-    [ActionType.EDIT_CELL]: (state: DataTableState, { payload: { rowID, rowKey, newValue } }: EditCellPayloadType) => {
-      // TODO: пофиксить, вынести из reducer'а
-      const ret = { ...state };
-      ret.json[rowID][rowKey] = newValue;
-      return ret;
-    },
-    [ActionType.SET_JSON_TABLE_DATA]: (state: DataTableState, { payload }: any) => ({
+    [ActionType.EDIT_CELL]: (state: DataTableState, { payload }: JsonObjectType) => ({
+      ...state,
+      json: cloneDeep(payload),
+    }),
+    [ActionType.SET_JSON_TABLE_DATA]: (state: DataTableState, { payload }: JsonObjectType) => ({
       ...state,
       json: payload,
+    }),
+    [ActionType.SET_JSON_TABLE_VECTOR]: (state: DataTableState, { payload }: JsonObjectType) => ({
+      ...state,
+      vector: payload,
     }),
   },
   initialState,
