@@ -4,21 +4,28 @@ import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { renderHeadLines, renderBodyLines } from '@components/Table/utils/TableMethods';
 import { useStyles } from '@components/Table/utils/styles';
-import { getData } from '@controllers/dataTable/selectors';
-import { JsonObjectType } from './utils/types';
+import { JsonObjectType } from '@components/Table/utils/types';
+import { getData, getVector } from '@controllers/dataTable/selectors';
 
 const DataTable: React.FC = () => {
-  const json: JsonObjectType = useSelector(getData);
-
-  const classes = useStyles();
-
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [tableData, setTableData] = React.useState<Array<JsonObjectType>>([]);
+
+  const dispatch = useDispatch();
+  const json = useSelector(getData);
+  const vector = useSelector(getVector);
+
+  useEffect(() => {
+    setTableData(json);
+  }, [dispatch, json]);
+
+  const classes = useStyles();
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -29,19 +36,18 @@ const DataTable: React.FC = () => {
     setPage(0);
   };
 
-  // TODO: Не работает перелистывание страниц
   return (
     <Paper>
       <TableContainer className={classes.container}>
         <Table className={classes.table} size="small" aria-label="sticky table" stickyHeader>
-          <TableHead>{renderHeadLines(json)}</TableHead>
-          <TableBody>{renderBodyLines(json, page, rowsPerPage)}</TableBody>
+          <TableHead>{renderHeadLines(vector)}</TableHead>
+          <TableBody>{renderBodyLines(tableData, page, rowsPerPage)}</TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={json.length}
+        count={tableData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

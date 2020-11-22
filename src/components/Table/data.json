@@ -1,16 +1,6 @@
 [
     {
-        "id": 0,
-        "name": "Егор",
-        "age": 18,
-        "aScore": 5.0,
-        "isVolunter": false,
-        "strongSubjects": "Физика",
-        "exam": "Матетамика",
-        "eScore": 5,
-        "grants": 7000,
-        "kurs": 1,
-        "debts": false
+        "id": 0
     },
 
     {
