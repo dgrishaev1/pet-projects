@@ -54,6 +54,9 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
 
 export const renderHeadLines = (data: Array<string>): JSX.Element => (
   <STableRow>
+    <STableCell padding="checkbox">
+      <Checkbox />
+    </STableCell>
     {data.map((title) => (
       <STableCell key={`cell-${title}`}>{title}</STableCell>
     ))}
