@@ -25,7 +25,7 @@ function Main(): React.ReactElement {
   return (
     <>
       <TopBar />
-      {isNormalized && <DataTable />}
+      {isNormalized && <DataTable json={json}/>}
     </>
   );
 }

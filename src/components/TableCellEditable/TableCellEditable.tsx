@@ -1,6 +1,6 @@
 import { Input } from '@material-ui/core';
 import debounce from 'lodash/debounce';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import ContextMenu from '@components/ContextMenu/ContextMenu';
@@ -15,7 +15,6 @@ export const TableCellEditable: React.FC<{
   rowID: number;
   rowKey: string;
 }> = ({ data, label, rowID, rowKey }) => {
-
   // TODO: Хуки не дают работать с меню
   const dispatch = useDispatch();
   const [isEditable, setEditCell] = React.useState(false);
@@ -29,16 +28,21 @@ export const TableCellEditable: React.FC<{
 
   const openContextMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    toggleMenu(ContextMenu({isEditable, anchorEl, inputText, rowID, rowKey}));
+    toggleMenu(ContextMenu({ isEditable, anchorEl, inputText, rowID, rowKey }));
   };
+
+  const saveInput = useCallback(
+    debounce((value) => {
+      data[rowID][rowKey] = value;
+      dispatch(modifyData(data));
+    }, 300),
+    [],
+  );
 
   const handleChangeInput = (selectedInputValue: InputType) => {
     editInputText(selectedInputValue);
-    data[rowID][rowKey] = selectedInputValue;
-    dispatch(modifyData(data));
+    saveInput(selectedInputValue);
   };
-
-  const handleChangeDebounce = debounce(handleChangeInput, 300);
 
   // TODO: Подумать над обновлением в таблице
   return (
@@ -46,9 +50,9 @@ export const TableCellEditable: React.FC<{
       <Input
         onDoubleClick={handleDoubleClickMenu}
         onContextMenu={openContextMenu}
-        defaultValue={label}
+        value={inputText}
         readOnly={!isEditable}
-        onChange={(e) => handleChangeDebounce(getValue(e))}
+        onChange={(e) => handleChangeInput(getValue(e))}
         disableUnderline={!isEditable}
       />
       {menu}

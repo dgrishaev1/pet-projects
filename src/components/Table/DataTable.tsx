@@ -12,14 +12,14 @@ import { useStyles } from '@components/Table/utils/styles';
 import { JsonObjectType } from '@components/Table/utils/types';
 import { getData, getVector } from '@controllers/dataTable/selectors';
 
-const DataTable: React.FC = () => {
+const DataTable: React.FC<{json: any}> = ({json}) => {
+  const dispatch = useDispatch();
+  // const json = useSelector(getData);
+  const vector = useSelector(getVector);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [tableData, setTableData] = React.useState<Array<JsonObjectType>>([]);
-
-  const dispatch = useDispatch();
-  const json = useSelector(getData);
-  const vector = useSelector(getVector);
 
   useEffect(() => {
     setTableData(json);
