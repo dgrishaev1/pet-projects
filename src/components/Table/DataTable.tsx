@@ -10,11 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { renderHeadLines, renderBodyLines } from '@components/Table/utils/TableMethods';
 import { useStyles } from '@components/Table/utils/styles';
 import { JsonObjectType } from '@components/Table/utils/types';
-import { getData, getVector } from '@controllers/dataTable/selectors';
+import { getVector } from '@controllers/dataTable/selectors';
 
 const DataTable: React.FC<{json: any}> = ({json}) => {
   const dispatch = useDispatch();
-  // const json = useSelector(getData);
   const vector = useSelector(getVector);
 
   const [page, setPage] = React.useState(0);

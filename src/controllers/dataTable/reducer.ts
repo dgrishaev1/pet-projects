@@ -32,16 +32,10 @@ export const dataTable = handleActions(
       ...state,
       vector: payload,
     }),
-    // [ActionType.SET_CONTROLS_STATE]: (state: DataTableState, { payload }: ControlsObjectType) => ({
-    //   ...state,
-    //   controlsSettings: payload,
-    // })
+    [ActionType.SET_CONTROLS_STATE]: (state: DataTableState, { payload }: ControlsObjectType) => ({
+      ...state,
+      controlsSettings: payload,
+    })
   },
   initialState,
 );
-
-// export const tableControls = handleActions({
-//   [ActionType.SET_CONTROLS_STATE]: (state: TableConstrolsState, { controlsObject }: ControlsObjectType) => ({
-//     controlsSettings: controlsObject,
-//   }),
-// }, initialControls);
