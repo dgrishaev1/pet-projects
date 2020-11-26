@@ -1,4 +1,4 @@
-import { JsonObjectType } from '@components/Table/utils/types';
+import { ControlsObjectType, JsonObjectType } from '@components/Table/utils/types';
 import { ActionType } from '@controllers/dataTable/types';
 
 export const modifyData = (payload: JsonObjectType) => ({
@@ -13,5 +13,10 @@ export const setJsonTableData = (payload: Array<JsonObjectType>) => ({
 
 export const setJsonTableVector = (payload: Array<string>) => ({
   type: ActionType.SET_JSON_TABLE_VECTOR,
+  payload
+});
+
+export const setTableControlsState = (payload: ControlsObjectType) => ({
+  type: ActionType.SET_CONTROLS_STATE,
   payload
 });
