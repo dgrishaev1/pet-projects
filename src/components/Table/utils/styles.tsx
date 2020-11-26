@@ -27,7 +27,8 @@ export const useStyles = makeStyles({
         backgroundColor: '#CBC8D1',
         color: '#5D5B60',
         fontWeight: theme.typography.fontWeightBold,
-        minWidth: 100,
+        minWidth: 200,
+        minHeight: 30,
       },
       body: {
         fontSize: 14,
