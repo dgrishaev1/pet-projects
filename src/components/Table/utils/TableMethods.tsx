@@ -26,6 +26,7 @@ const convertValue = (value: JsonDataType): string => {
   return value.toString();
 };
 
+// TODO: пофиксить редактирование не на 1 странице
 export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage: number): Array<JSX.Element> =>
   data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: string, rowID: number) => {
     const cellsArray = Object.entries(row).reduce((cells: Array<JSX.Element>, [rowKey, value]) => {
