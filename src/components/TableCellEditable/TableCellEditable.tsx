@@ -1,6 +1,6 @@
-import { Input } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import debounce from 'lodash/debounce';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { getValue } from '@components/Table/utils/TableMethods';
@@ -21,14 +21,14 @@ export const TableCellEditable: React.FC<{
   const dispatch = useDispatch();
 
   const [isEditable, setEditCell] = React.useState(false);
-  const [inputText, editInputText] = React.useState(label);
+  const [inputText, setInputText] = React.useState(label);
+
+  useEffect(() => {
+    setInputText(label);
+  }, [label]);
 
   const handleDoubleClickMenu = () => {
     setEditCell(!isEditable);
-  };
-
-  const showDeleteButton = () => {
-    return label ? <DeleteButton isEditable={isEditable} data={data} rowID={rowID} rowKey={rowKey} /> : null; 
   };
 
   const saveInput = useCallback(
@@ -40,22 +40,31 @@ export const TableCellEditable: React.FC<{
   );
 
   const handleChangeInput = (selectedInputValue: InputType) => {
-    editInputText(selectedInputValue);
+    setInputText(selectedInputValue);
     saveInput(selectedInputValue);
   };
 
-  // TODO: Подумать над обновлением в таблице
   return (
     <STableCell>
       <div className={classes.cell}>
-        {showDeleteButton()}
-        <Input className={classes.input}
+        <TextField className={classes.input}
+          multiline
+          variant="outlined"
           onDoubleClick={handleDoubleClickMenu}
           value={inputText}
-          readOnly={!isEditable}
+          disabled={!isEditable}
           onChange={(e) => handleChangeInput(getValue(e))}
-          disableUnderline={!isEditable}
+          size="small"
         />
+        { 
+          inputText && 
+          <DeleteButton 
+            isEditable={isEditable} 
+            data={data} 
+            rowID={rowID} 
+            rowKey={rowKey} 
+          /> 
+        }
       </div>
     </STableCell>
   );
