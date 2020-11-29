@@ -29,6 +29,7 @@ export const useStyles = makeStyles({
         fontWeight: theme.typography.fontWeightBold,
         minWidth: 200,
         minHeight: 30,
+        textAlign: 'center',
       },
       body: {
         fontSize: 14,

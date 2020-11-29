@@ -44,7 +44,7 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
 
     return (
       <STableRow key={`row-${rowID}`}>
-        <STableCell padding="checkbox">
+        <STableCell align="center" padding="checkbox">
           <Checkbox />
         </STableCell>
 
