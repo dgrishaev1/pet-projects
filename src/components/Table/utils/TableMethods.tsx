@@ -23,7 +23,7 @@ const convertValue = (value: JsonDataType): string => {
     return '[array]';
   }
 
-  return value.toString();
+  return value + "";
 };
 
 // TODO: пофиксить редактирование не на 1 странице
@@ -37,7 +37,7 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
           data={data}
           rowID={rowID}
           rowKey={rowKey}
-          label={convertValue(value)}
+          cellText={convertValue(value)}
         />,
       ];
     }, []);
