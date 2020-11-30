@@ -12,20 +12,20 @@ import { modifyData } from '@controllers/dataTable/actions';
 
 export const TableCellEditable: React.FC<{
   data: JsonObjectType;
-  label: InputType;
+  cellText: InputType;
   rowID: number;
   rowKey: string;
-}> = ({ data, label, rowID, rowKey }) => {
+}> = ({ data, cellText, rowID, rowKey }) => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [isEditable, setEditCell] = React.useState(false);
-  const [inputText, setInputText] = React.useState(label);
+  const [inputText, setInputText] = React.useState(cellText);
 
   useEffect(() => {
-    setInputText(label);
-  }, [label]);
+    setInputText(cellText);
+  }, [cellText]);
 
   const handleDoubleClickMenu = () => {
     setEditCell(!isEditable);
