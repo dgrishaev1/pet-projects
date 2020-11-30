@@ -15,8 +15,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#E1E2E8',
-      borderRadius: 10,
       boxSizing: 'border-box',
       padding: 5,
       minHeight: 50
