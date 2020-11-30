@@ -12,7 +12,7 @@ import { useStyles } from '@components/Table/utils/styles';
 import { JsonObjectType } from '@components/Table/utils/types';
 import { getVector } from '@controllers/dataTable/selectors';
 
-const DataTable: React.FC<{json: any}> = ({json}) => {
+const DataTable: React.FC<{json: Array<JsonObjectType>}> = ({json}) => {
   const dispatch = useDispatch();
   const vector = useSelector(getVector);
 
