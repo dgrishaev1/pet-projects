@@ -1,5 +1,7 @@
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 
+const drawerWidth = 250;
+
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -69,6 +71,24 @@ export const useStyles = makeStyles((theme: Theme) =>
       '&:focus': {
         width: '20ch',
       },
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 2),
+      ...theme.mixins.toolbar,
+      justifyContent: 'space-between',
+    },
+    backdrop: {
+      zIndex: 99,
+      color: '#fff',
     },
   }),
 );
