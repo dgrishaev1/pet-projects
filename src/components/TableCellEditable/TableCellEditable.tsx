@@ -46,24 +46,27 @@ export const TableCellEditable: React.FC<{
 
   return (
     <STableCell>
-      <div className={classes.cell}>
-        <TextField className={classes.input}
-          multiline
-          variant="outlined"
-          onDoubleClick={handleDoubleClickMenu}
-          value={inputText}
-          disabled={!isEditable}
-          onChange={(e) => handleChangeInput(getValue(e))}
-          size="small"
-        />
-        { 
+      <div className={classes.cell} >
+        {
           inputText && 
-          <DeleteButton 
-            isEditable={isEditable} 
-            data={data} 
-            rowID={rowID} 
-            rowKey={rowKey} 
-          /> 
+            <TextField className={classes.input}
+              multiline
+              variant="outlined"
+              onDoubleClick={handleDoubleClickMenu}
+              value={inputText}
+              disabled={!isEditable}
+              onChange={(e) => handleChangeInput(getValue(e))}
+              size="small"
+            />
+        }
+        {
+          inputText &&
+            <DeleteButton 
+              isEditable={isEditable} 
+              data={data} 
+              rowID={rowID} 
+              rowKey={rowKey} 
+             /> 
         }
       </div>
     </STableCell>
