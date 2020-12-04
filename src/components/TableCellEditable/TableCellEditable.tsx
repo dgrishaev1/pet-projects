@@ -1,11 +1,11 @@
-import TextField from '@material-ui/core/TextField';
+import { InputAdornment, OutlinedInput } from '@material-ui/core';
 import debounce from 'lodash/debounce';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getValue } from '@components/Table/utils/TableMethods';
 import { STableCell } from '@components/Table/utils/styles';
 import { InputType, JsonObjectType } from '@components/Table/utils/types';
+import { getValue } from '@components/Table/utils/usefulls';
 import { DeleteButton } from '@components/TableCellEditable/DeleteButton';
 import { useStyles } from '@components/TableCellEditable/styles';
 import { modifyData } from '@controllers/dataTable/actions';
@@ -46,26 +46,26 @@ export const TableCellEditable: React.FC<{
 
   return (
     <STableCell>
-      <div className={classes.cell} >
-        <TextField className={classes.input}
-          multiline
-          variant="outlined"
-          onDoubleClick={handleDoubleClickMenu}
-          value={inputText}
-          disabled={!isEditable}
-          onChange={(e) => handleChangeInput(getValue(e))}
-          size="small"
-        />
-        {
-          inputText &&
-            <DeleteButton 
-              isEditable={isEditable} 
-              data={data} 
-              rowID={rowID} 
-              rowKey={rowKey} 
-             /> 
-        }
-      </div>
+      <OutlinedInput className={classes.input}
+        multiline
+        onDoubleClick={handleDoubleClickMenu}
+        value={inputText}
+        disabled={!isEditable}
+        onChange={(e) => handleChangeInput(getValue(e))}
+        endAdornment={(
+          <InputAdornment position="end">
+            {
+              inputText && (
+              <DeleteButton 
+                isEditable={isEditable} 
+                data={data} 
+                rowID={rowID} 
+                rowKey={rowKey} 
+              />
+            )}
+          </InputAdornment>
+        )}
+      />
     </STableCell>
   );
 };
