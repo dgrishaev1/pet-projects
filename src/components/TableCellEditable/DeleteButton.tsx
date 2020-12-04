@@ -4,7 +4,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { JsonObjectType } from '@components/Table/utils/types';
-import { useStyles } from '@components/TableCellEditable/styles';
 import { modifyData } from '@controllers/dataTable/actions';
 
 
@@ -16,7 +15,6 @@ export const DeleteButton: React.FC<{isEditable: boolean, data: JsonObjectType, 
 }) => {
 
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   const deleteValue = () => {
     data[rowID][rowKey] = null;
@@ -24,7 +22,7 @@ export const DeleteButton: React.FC<{isEditable: boolean, data: JsonObjectType, 
   };
 
   return (
-    <IconButton onClick={deleteValue} aria-label="delete" className={classes.button} disabled={isEditable} >
+    <IconButton onClick={deleteValue} aria-label="delete" disabled={isEditable} >
       <DeleteIcon fontSize="small" />
     </IconButton>
   );
