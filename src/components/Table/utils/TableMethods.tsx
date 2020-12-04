@@ -1,29 +1,19 @@
+import Checkbox from '@material-ui/core/Checkbox';
 import React from 'react';
 
-import Checkbox from '@material-ui/core/Checkbox';
 import { STableRow, STableCell } from '@components/Table/utils/styles';
-import { JsonDataType, JsonObjectType, InputType } from '@components/Table/utils/types';
+import { JsonDataType, JsonObjectType } from '@components/Table/utils/types';
 import { TableCellEditable } from '@components/TableCellEditable/TableCellEditable';
 
 const convertValue = (value: JsonDataType): string => {
-  if (value === null) {
-    return '';
-  }
+  const type = typeof(value);
 
-  const type = typeof value;
+  if (Array.isArray(value)) return '[array]';
+  if (value === null) return '';
+  if (type === 'object') return '[object]';
+  if (type === 'boolean') return value ? 'Да' : 'Нет';
 
-  if (type === 'object') {
-    return '[object]';
-  }
-  if (type === 'boolean') {
-    return value ? 'Да' : 'Нет';
-  }
-
-  if (Array.isArray(value)) {
-    return '[array]';
-  }
-
-  return value + "";
+  return value.toString();
 };
 
 export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage: number): Array<JSX.Element> =>
@@ -43,8 +33,8 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
 
     return (
       <STableRow key={`row-${rowID}`}>
-        <STableCell align="center" padding="checkbox">
-          <Checkbox />
+        <STableCell align="center" >
+          <Checkbox color="default" />
         </STableCell>
 
         {cellsArray}
@@ -54,17 +44,11 @@ export const renderBodyLines = (data: JsonObjectType, page: number, rowsPerPage:
 
 export const renderHeadLines = (data: Array<string>): JSX.Element => (
   <STableRow>
-    <STableCell padding="checkbox">
-      <Checkbox />
+    <STableCell>
+      <Checkbox color="default" />
     </STableCell>
     {data.map((title) => (
       <STableCell key={`cell-${title}`}>{title}</STableCell>
     ))}
   </STableRow>
 );
-
-export const getValue = (e: React.SyntheticEvent): InputType => {
-  const target = e.target as HTMLInputElement;
-
-  return +target.value || target.value;
-};
