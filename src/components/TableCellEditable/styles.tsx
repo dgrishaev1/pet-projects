@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme: Theme) =>
       width: 'auto',
       margin: 5,
       backgroundColor: theme.palette.background.default,
-      outline: 'none'
+      outline: 'none',
+      padding: '10px 10px',
     },
     cell: {
       display: 'flex',
@@ -15,7 +16,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       boxSizing: 'border-box',
       padding: 5,
-      minHeight: 50
+      minHeight: 40
     }
   }),
 );

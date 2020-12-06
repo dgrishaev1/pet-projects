@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/s
 
 export const useStyles = makeStyles({
     table: {
-      minWidth: 100,
+      minWidth: 800,
     },
     container: {
       maxHeight: 700,
@@ -28,7 +28,7 @@ export const useStyles = makeStyles({
         color: '#5D5B60',
         fontWeight: theme.typography.fontWeightBold,
         minWidth: 200,
-        minHeight: 50,
+        minHeight: 30,
         textAlign: 'center',
       },
       body: {
