@@ -2,12 +2,11 @@ import { keys } from 'lodash';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Tree from '@components/Tree/Tree';
+import DataTable from '@components/Table/DataTable';
 import { TopBar } from '@containers/TopBar/TopBar';
 import { setJsonTableVector, setJsonTableData } from '@controllers/dataTable/actions';
 import { getData } from '@controllers/dataTable/selectors';
 import { normalizeJsonData, normalizeVector } from '@pages/Main/utils';
-import DataTable from '@components/Table/DataTable';
 
 function Main(): React.ReactElement {
   const dispatch = useDispatch();
@@ -23,11 +22,11 @@ function Main(): React.ReactElement {
     setNormalized(true);
   }, []);
 
+  // todo: сделать передачу параметра TopBar "open" для изменения marginRight'а DataTable
   return (
     <>
       {isNormalized && <TopBar json={json}/>}
       {isNormalized && <DataTable json={json}/>}
-      {/*{isNormalized && <Tree json={json}/>}*/}
     </>
   );
 }

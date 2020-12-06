@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 import { renderTree } from '@components/Tree/utils/TableMethods';
 import { JsonObjectType } from '@components/Tree/utils/types';
-import { InputType } from '@components/Table/utils/types';
+// import { InputType } from '@components/Table/utils/types';
 
 const useStyles = makeStyles({
   root: {

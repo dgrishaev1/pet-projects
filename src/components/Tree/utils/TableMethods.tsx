@@ -1,7 +1,7 @@
 import { TreeItem } from '@material-ui/lab';
 import React from 'react';
 
-import { TreeRow } from '@components/Table/TreeRow/TreeRow';
+import { TreeRow } from '@components/TreeRow/TreeRow';
 import { convertValue } from '@components/Table/utils/TableMethods';
 import { JsonObjectType } from '@components/Table/utils/types';
 

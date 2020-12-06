@@ -103,7 +103,7 @@ export const TreeRow: React.FC<{
 
   const [isHovered, setHovered] = React.useState(false);
   const [value, setValue] = React.useState(rowValue);
-  // check 3
+  // todo: присвоить тип
   const [inputText, setInputText] = React.useState<any>(rowValue);
   const [isEditable, setEditable] = React.useState(false);
 
@@ -123,10 +123,10 @@ export const TreeRow: React.FC<{
   };
 
   const saveNewValue = () => {
-    // console.log('save',inputText);
-    // check 2
-    data[rowID][rowKey] = inputText;
-    dispatch(modifyData(inputText));
+    // todo: при изменении вылетает
+    console.log('save',inputText);
+    // data[rowID][rowKey] = inputText;
+    // dispatch(modifyData(inputText));
   };
 
   const renderButtons = () =>
@@ -139,7 +139,7 @@ export const TreeRow: React.FC<{
             className={classes.iconButton}
             onClick={
               info.defaultEditableValue !== undefined
-                // check 1
+                // todo: можно ли сделать проще?
                 ? () => {
                     info.type === 'CheckIcon' && saveNewValue();
                     setEditable(info.defaultEditableValue);
