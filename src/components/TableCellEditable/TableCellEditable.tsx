@@ -36,7 +36,7 @@ export const TableCellEditable: React.FC<{
       data[rowID][rowKey] = value;
       dispatch(modifyData(data));
     }, 300),
-    [],
+    [data],
   );
 
   const handleChangeInput = (selectedInputValue: InputType) => {
