@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import { InputType, JsonObjectType } from '@components/Table/utils/types';
 import { getValue } from '@components/Table/utils/usefulls';
 import { modifyData } from '@controllers/dataTable/actions';
-import { TreeItem } from '@material-ui/lab';
 
 const useStyles = makeStyles({
   li: {
@@ -137,8 +136,8 @@ export const TreeRow: React.FC<{
             className={classes.iconButton}
             onClick={
               info.defaultEditableValue !== undefined
-                // todo: можно ли сделать проще?
-                ? () => {
+                ? // todo: можно ли сделать проще?
+                  () => {
                     info.type === 'CheckIcon' && saveNewValue();
                     setEditable(info.defaultEditableValue);
                   }
@@ -152,6 +151,7 @@ export const TreeRow: React.FC<{
       [],
     );
 
+  // todo: отображение null
   return (
     <li className={classes.li} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
       <div className={classes.content}>
