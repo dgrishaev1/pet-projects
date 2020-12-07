@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { InputType, JsonObjectType } from '@components/Table/utils/types';
 import { getValue } from '@components/Table/utils/usefulls';
 import { modifyData } from '@controllers/dataTable/actions';
+import { TreeItem } from '@material-ui/lab';
 
 const useStyles = makeStyles({
   li: {
@@ -103,8 +104,7 @@ export const TreeRow: React.FC<{
 
   const [isHovered, setHovered] = React.useState(false);
   const [value, setValue] = React.useState(rowValue);
-  // todo: присвоить тип
-  const [inputText, setInputText] = React.useState<any>(rowValue);
+  const [inputText, setInputText] = React.useState<InputType>(rowValue);
   const [isEditable, setEditable] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -123,10 +123,8 @@ export const TreeRow: React.FC<{
   };
 
   const saveNewValue = () => {
-    // todo: при изменении вылетает
-    console.log('save',inputText);
-    // data[rowID][rowKey] = inputText;
-    // dispatch(modifyData(inputText));
+    data[rowID][rowKey] = inputText;
+    dispatch(modifyData(data));
   };
 
   const renderButtons = () =>

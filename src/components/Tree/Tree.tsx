@@ -5,8 +5,8 @@ import TreeView from '@material-ui/lab/TreeView';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { renderTree } from '@components/Tree/utils/TableMethods';
-import { JsonObjectType } from '@components/Tree/utils/types';
+import { JsonObjectType } from '@components/Table/utils/types';
+import { renderTree } from '@components/Tree/utils/TreeMethods';
 // import { InputType } from '@components/Table/utils/types';
 
 const useStyles = makeStyles({

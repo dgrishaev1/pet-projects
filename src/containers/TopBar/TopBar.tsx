@@ -6,11 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
-import React from 'react';
+import React, { SetStateAction } from 'react';
 
 import Tree from '@components/Tree/Tree';
 
-const drawerWidth = 400;
+export const drawerWidth = 400;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,10 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const TopBar: React.FC<{json: any}> = ({json}) => {
+export const TopBar: React.FC<{json: any, isOpen: boolean, setOpen: SetStateAction<any>}> = ({json, isOpen, setOpen}) => {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -78,7 +78,7 @@ export const TopBar: React.FC<{json: any}> = ({json}) => {
         className={classes.drawer}
         variant="persistent"
         anchor="right"
-        open={open}
+        open={isOpen}
         classes={{
           paper: classes.drawerPaper,
         }}

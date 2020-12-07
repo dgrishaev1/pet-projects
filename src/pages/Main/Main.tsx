@@ -13,7 +13,8 @@ function Main(): React.ReactElement {
   const json = useSelector(getData);
 
   const [isNormalized, setNormalized] = React.useState(false);
-  
+  const [open, setOpen] = React.useState(false);
+
   useEffect(() => {
     const dataVector = normalizeVector(json);
     dispatch(setJsonTableVector(keys(dataVector)));
@@ -22,11 +23,10 @@ function Main(): React.ReactElement {
     setNormalized(true);
   }, []);
 
-  // todo: сделать передачу параметра TopBar "open" для изменения marginRight'а DataTable
   return (
     <>
-      {isNormalized && <TopBar json={json}/>}
-      {isNormalized && <DataTable json={json}/>}
+      {isNormalized && <TopBar json={json} isOpen={open} setOpen={setOpen}/>}
+      {isNormalized && <DataTable json={json} isOpen={open}/>}
     </>
   );
 }

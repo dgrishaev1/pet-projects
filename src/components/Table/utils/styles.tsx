@@ -2,12 +2,19 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 
+import { drawerWidth } from '@containers/TopBar/TopBar';
+
 export const useStyles = makeStyles({
     table: {
       minWidth: 100,
     },
     container: {
       maxHeight: 700,
+    },
+    paperDrawer: {
+      transitionProperty: 'margin',
+      transitionDuration: '0.3s',
+      marginRight: drawerWidth,
     },
   });
   
