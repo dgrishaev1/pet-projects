@@ -1,4 +1,3 @@
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import { TreeItem } from '@material-ui/lab';
 import isNil from 'lodash/isNil';
 import React from 'react';
@@ -7,18 +6,16 @@ import { convertValue } from '@components/Table/utils/TableMethods';
 import { JsonObjectType } from '@components/Table/utils/types';
 import { TreeRow } from '@components/TreeRow/TreeRow';
 
-const useStyles = makeStyles({
-  treeItem: {
-    width: '100%',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-  },
-});
-
 // todo: типы
-const renderSubTree = (nodeID: string, rowKey: string, data: JsonObjectType, rowID: number, value: any): any => {
+const renderSubTree = ( // слишком много аргументов
+  nodeID: string,
+  rowKey: string,
+  data: JsonObjectType,
+  rowID: number,
+  value: any,
+): JSX.Element => {
   const subtree: Array<JSX.Element> = [];
+
   if (Array.isArray(value)) {
     value.forEach((elem: any, id: any) => {
       if (!isNil(elem) && typeof elem === 'object') {
@@ -48,7 +45,7 @@ export const renderTree = (data: JsonObjectType): Array<JSX.Element> =>
   data.map((row: string, rowID: number) => {
     const cellsArray = Object.entries(row).reduce((cells: Array<JSX.Element>, [rowKey, value]) => {
       if (!isNil(value) && typeof value === 'object') {
-        return [...cells, renderSubTree(`${rowID.toString()}-${rowKey}`, rowKey, data, rowID, value)];
+        return [...cells, renderSubTree(`${rowID}-${rowKey}`, rowKey, data, rowID, value)];
       }
       return [
         ...cells,
@@ -57,7 +54,7 @@ export const renderTree = (data: JsonObjectType): Array<JSX.Element> =>
     }, []);
 
     return (
-      <TreeItem key={`tree-${rowID.toString()}`} nodeId={rowID.toString()} label={rowID}>
+      <TreeItem key={`tree-${rowID}`} nodeId={rowID.toString()} label={rowID}>
         {cellsArray}
       </TreeItem>
     );
