@@ -7,7 +7,8 @@ import { JsonObjectType } from '@components/Table/utils/types';
 import { TreeRow } from '@components/TreeRow/TreeRow';
 
 // todo: типы
-const renderSubTree = ( // слишком много аргументов
+const renderSubTree = (
+  // слишком много аргументов
   nodeID: string,
   rowKey: string,
   data: JsonObjectType,
