@@ -12,7 +12,7 @@ import { useStyles } from '@components/Table/utils/styles';
 import { JsonObjectType } from '@components/Table/utils/types';
 import { getVector } from '@controllers/dataTable/selectors';
 
-const DataTable: React.FC<{json: Array<JsonObjectType>}> = ({json}) => {
+const DataTable: React.FC<{json: Array<JsonObjectType>, isOpen: boolean}> = ({json, isOpen}) => {
   const dispatch = useDispatch();
   const vector = useSelector(getVector);
 
@@ -36,7 +36,7 @@ const DataTable: React.FC<{json: Array<JsonObjectType>}> = ({json}) => {
   };
 
   return (
-    <Paper>
+    <Paper className={isOpen ? classes.paperDrawer : ''}>
       <TableContainer className={classes.container}>
         <Table className={classes.table} size="small" aria-label="sticky table" stickyHeader>
           <TableHead>{renderHeadLines(vector)}</TableHead>

@@ -5,7 +5,7 @@ import { STableRow, STableCell } from '@components/Table/utils/styles';
 import { JsonDataType, JsonObjectType } from '@components/Table/utils/types';
 import { TableCellEditable } from '@components/TableCellEditable/TableCellEditable';
 
-const convertValue = (value: JsonDataType): string => {
+export const convertValue = (value: JsonDataType): string => {
   const type = typeof(value);
 
   if (Array.isArray(value)) return '[array]';

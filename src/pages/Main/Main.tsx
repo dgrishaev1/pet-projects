@@ -13,6 +13,7 @@ function Main(): React.ReactElement {
   const json = useSelector(getData);
 
   const [isNormalized, setNormalized] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     const dataVector = normalizeVector(json);
@@ -24,8 +25,8 @@ function Main(): React.ReactElement {
 
   return (
     <>
-      <TopBar />
-      {isNormalized && <DataTable json={json}/>}
+      {isNormalized && <TopBar json={json} isOpen={open} setOpen={setOpen}/>}
+      {isNormalized && <DataTable json={json} isOpen={open}/>}
     </>
   );
 }
