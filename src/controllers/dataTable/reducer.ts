@@ -24,6 +24,10 @@ export const dataTable = handleActions(
       ...state,
       json: cloneDeep(payload),
     }),
+    [ActionType.SET_JSON]: (state: DataTableState, { payload }: JsonObjectType) => ({
+      ...state,
+      json: payload,
+    }),
     [ActionType.SET_JSON_TABLE_DATA]: (state: DataTableState, { payload }: JsonObjectType) => ({
       ...state,
       json: payload,
