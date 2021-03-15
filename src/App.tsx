@@ -1,20 +1,15 @@
 import React from 'react';
-import Main from './containers/Main/Main';
-import {Switch, Redirect, Route} from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
+
+import Main from '@pages/Main/Main';
 
 const App: React.FC = () => {
-  let routes = (
-    <Switch>
-      <Route path="/" exact component={Main}/>
-      <Redirect to="/"/>
-    </Switch>
-  )
-
   return (
-    <div>
-      {routes}
-    </div>
-  )
-}
+    <Switch>
+      <Route path="/" exact component={Main} />
+      <Redirect to="/" />
+    </Switch>
+  );
+};
 
-export default App
+export default App;
