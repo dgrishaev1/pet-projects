@@ -11,5 +11,8 @@
   "dependencies": {},
   "devDependencies": {
     "jest": "^27.4.7"
+  },
+  "jest": {
+    "testPathIgnorePatterns": ["src/setup.test.js"]
   }
 }
