@@ -1,13 +1,15 @@
-import React from 'react';
-import './App.scss';
+import React from "react";
+import "./App.scss";
 import block from "bem-cn";
+import Button from "../Button/Button";
 
-const b = block('app')
+const b = block("app");
 
 function App() {
   return (
     <div className={b()}>
       <h1>ui-kit-rollup</h1>
+      <Button>button</Button>
     </div>
   );
 }
