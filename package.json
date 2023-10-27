@@ -1,7 +1,12 @@
 {
-  "name": "ui-kit-rollup",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@dgrishaev1/ui-kit-rollup",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/dgrishaev1"
+  },
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "files": ["dist/**/*"],
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
