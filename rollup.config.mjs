@@ -7,7 +7,7 @@ import dts from 'rollup-plugin-dts';
 
 const config = [
     {
-        input: 'src/package.ts',
+        input: 'src/index.tsx',
         output: {
             dir: 'dist',
             format: 'esm',
@@ -28,8 +28,8 @@ const config = [
         ],
     },
     {
-        input: 'dist/types/package.d.ts',
-        output: [{ file: 'dist/package.d.ts', format: 'esm' }],
+        input: 'dist/types/index.d.ts',
+        output: [{ file: 'dist/index.d.ts', format: 'esm' }],
         external: [/\.(css|scss)$/],
         plugins: [dts()],
     },
