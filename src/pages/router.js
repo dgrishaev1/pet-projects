@@ -7,12 +7,12 @@ export const ROUTES = {
   CREATE: "/create",
 };
 
-const routes = [
+const routesConfig = [
   { path: ROUTES.MAIN, name: "Главная", component: Main },
   { path: ROUTES.CREATE, name: "Создание публикации", component: Create },
 ];
 
 export const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: routesConfig,
 });
