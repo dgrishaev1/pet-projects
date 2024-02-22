@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "buefy": "github:buefy/buefy#buefy-next",
     "vue": "^3.4.19"
   },
   "devDependencies": {
