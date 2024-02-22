@@ -1,16 +1,25 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  background: #808eb5;
+  --text-primary-color: #4a4a4a;
+  --card-primary-color: white;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Input */
+  --input-color: var(--text-primary-color);
+  --input-placeholder-color: #c2c2c2;
+  --input-bg-color: white;
+  --input-border-color: #dbdbdb;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root.theme-dark {
+  background: #40444f;
+  --text-primary-color: #e5e5e5;
+  --card-primary-color: #2d2d2d;
+
+  /* Input */
+  --input-color: var(--text-primary-color);
+  --input-placeholder-color: #bbbbbb;
+  --input-bg-color: #4b4b4b;
+  --input-border-color: #40444f;
 }
 
 body {
@@ -23,3 +32,21 @@ body {
   margin: 0 auto;
   padding: 2rem;
 }
+
+.card {
+  color: var(--text-primary-color) !important;
+  background-color: var(--card-primary-color) !important;;
+}
+.label {
+  color: var(--text-primary-color) !important;
+}
+
+.input, .textarea {
+  color: var(--input-color) !important;
+  background-color: var(--input-bg-color) !important;
+  border-color: var(--input-border-color) !important;
+}
+.input::placeholder, .textarea::placeholder {
+  color: var(--input-placeholder-color) !important;
+}
+
