@@ -15,7 +15,11 @@ export default {
   <header class="card p-4 has-background-white">
     <div class="is-flex is-justify-content-space-between is-align-items-center">
       <h1 class="is-size-2">Vue blog</h1>
-      <div><b-button type="is-info">Создать публикацию</b-button></div>
+      <div>
+        <router-link to="/create">
+          <b-button type="is-info">Создать публикацию</b-button>
+        </router-link>
+      </div>
     </div>
   </header>
   <main>
