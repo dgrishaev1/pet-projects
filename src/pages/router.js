@@ -11,20 +11,20 @@ export const ROUTES = {
 
 const routesConfig = [
     { path: ROUTES.MAIN, name: 'Главная', component: Main },
-    { path: ROUTES.CREATE, name: 'Создание публикации', component: Create },
+    { path: ROUTES.CREATE, name: 'Создание квиза', component: Create },
     {
         path: ROUTES.READ,
-        name: 'Публикация',
-        template: '<div>Публикация</div>',
+        name: 'Публикация квиза',
+        template: '<div>Квиз</div>',
     },
     {
         path: ROUTES.UPDATE,
-        name: 'Редактирование публикации',
-        template: '<div>Редактирование публикации</div>',
+        name: 'Редактирование квиза',
+        template: '<div>Редактирование квиза</div>',
     },
 ]
 
-const DEFAULT_TITLE = 'Vue blog'
+const DEFAULT_TITLE = 'Vue quiz'
 
 const router = createRouter({
     history: createWebHistory(),

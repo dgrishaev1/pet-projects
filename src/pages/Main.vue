@@ -5,8 +5,8 @@ export default {
             posts: new Array(3).fill('').map((_, index) => {
                 return {
                     id: index + 1,
-                    title: `Публикация №${index + 1}`,
-                    content: 'Содержимое публикации',
+                    title: `Квиз №${index + 1}`,
+                    content: 'Краткое содержание квиза',
                     isHover: false,
                 }
             }),
@@ -20,11 +20,11 @@ export default {
         },
         onClickDelete(index) {
             this.$buefy.dialog.confirm({
-                message: `Удалить публикацию №${index}?`,
+                message: `Удалить квиз №${index}?`,
                 cancelText: 'Отмена',
                 confirmText: 'Подтвердить',
                 onConfirm: () => {
-                    this.$buefy.toast.open('Публикация удалена')
+                    this.$buefy.toast.open('Квиз удалён')
                 },
             })
         },
