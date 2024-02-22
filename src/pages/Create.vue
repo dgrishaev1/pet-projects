@@ -1,11 +1,34 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      title: "",
+      content: "",
+    };
   },
 };
 </script>
 
 <template>
-  <p>Создание публикации</p>
+  <div class="card mt-2 pt-3 pb-4 px-4">
+    <div>
+      <h1 class="is-size-3">Создание публикации</h1>
+    </div>
+    <form class="mt-2">
+      <b-field label="Заголовок">
+        <b-input v-model="title" placeholder="Введите" />
+      </b-field>
+      <b-field label="Содержимое">
+        <b-input
+          v-model="content"
+          placeholder="Введите"
+          type="textarea"
+          maxlength="200"
+        />
+      </b-field>
+      <b-button type="is-success" :disabled="!title || !content"
+        >Создать публикацию</b-button
+      >
+    </form>
+  </div>
 </template>
