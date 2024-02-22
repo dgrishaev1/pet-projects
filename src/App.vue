@@ -1,14 +1,14 @@
 <script>
-import HeaderComponent from "./components/Header.vue";
+import HeaderComponent from './components/Header.vue'
 
 export default {
-  components: { HeaderComponent },
-};
+    components: { HeaderComponent },
+}
 </script>
 
 <template>
-  <header-component />
-  <main>
-    <router-view />
-  </main>
+    <header-component />
+    <main>
+        <router-view />
+    </main>
 </template>
