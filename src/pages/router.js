@@ -24,7 +24,15 @@ const routesConfig = [
     },
 ]
 
-export const router = createRouter({
+const DEFAULT_TITLE = 'Vue blog'
+
+const router = createRouter({
     history: createWebHistory(),
     routes: routesConfig,
 })
+router.beforeEach((to, from, next) => {
+    document.title = to.name || DEFAULT_TITLE
+    next()
+})
+
+export default router
