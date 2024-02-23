@@ -7,7 +7,7 @@
 :root.theme-dark {
   background: #40444f;
   --text-primary-color: #e5e5e5;
-  --card-primary-color: #2d2d2d;
+  --card-primary-color: #2d2d2dc2;
 }
 
 body {
