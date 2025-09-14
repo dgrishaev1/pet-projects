@@ -1,0 +1,53 @@
+.button {
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  padding: 0 0.6rem;
+  cursor: pointer;
+  height: 2rem;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 0.875rem;
+  font-style: normal;
+  line-height: 1rem;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+
+  & > span {
+    display: inline-flex;
+  }
+
+  &__icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+
+    &_end {
+      margin-right: unset;
+      margin-left: 0.5rem;
+    }
+  }
+
+  &:hover,
+  &:active {
+    opacity: 0.9;
+  }
+
+  &[disabled] {
+    opacity: 1;
+    cursor: no-drop;
+  }
+
+  &_default {
+    font-size: 1rem;
+    color: white;
+    background: dodgerblue;
+
+    &[disabled] {
+      color: grey;
+      background-color: steelblue;
+    }
+  }
+
+}

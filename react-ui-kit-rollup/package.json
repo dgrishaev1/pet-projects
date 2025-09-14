@@ -1,0 +1,67 @@
+{
+  "name": "@dgrishaev1/ui-kit-rollup",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/dgrishaev1"
+  },
+  "version": "1.0.1",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.59",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "bem-cn": "^3.0.1",
+    "postcss": "^8.4.31",
+    "postcss-loader": "^7.3.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "rollup": "^3.29.4",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "npm run clean && rollup -c",
+    "clean": "rimraf ./dist",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@craco/types": "^7.1.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@rollup/plugin-url": "^8.0.2",
+    "@svgr/rollup": "^8.1.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-postcss": "^4.0.2"
+  }
+}
