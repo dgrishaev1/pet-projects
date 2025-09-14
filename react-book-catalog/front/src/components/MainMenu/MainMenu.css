@@ -1,0 +1,14 @@
+.main-menu {
+  display: inline-block;
+  & a {
+    color: var(--block-bg);
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 1em;
+    transition: color 0.05s linear;
+
+    &:hover {
+      color: var(--main);
+    }
+  }
+}
